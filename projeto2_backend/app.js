@@ -14,6 +14,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+cd
 app.use(express.json());
 
 const historyRouter = require('./routes/history');
@@ -25,3 +26,10 @@ app.listen(port, () => {
 });
 
 module.exports = app
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
